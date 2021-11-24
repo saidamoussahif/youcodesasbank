@@ -21,7 +21,7 @@ int main()
 
     int menu,nombredescomptes,count = 0,operation,affichage;
 
-    int i=0, v=0,a=0,j=0,e=0;
+    int i=0, v,j=0,e=0;
     int n=0;
     char ID[20];
 
@@ -56,19 +56,20 @@ int main()
 
             printf("entrer votre nom :\n");
 
-            scanf("%s",&compt[i].nom);
+            scanf("%s",compt[count].nom);
 
             printf("entrer votre prenom :\n");
 
-            scanf("%s",&compt[i].prenom);
+            scanf("%s",compt[count].prenom);
 
             printf("entrer la CIN :\n");
 
-            scanf("%s",&compt[i].CIN);
+            scanf("%s",compt[count].CIN);
 
             printf("entrer le montant :\n");
 
-            scanf("%f",&compt[i].montant);
+            scanf("%f",&compt[count].montant);
+
             count++;
             break;
 
@@ -78,8 +79,8 @@ int main()
             printf("entrer le nombre des comptes que vous voulez creer:\n");
 
             scanf("%d",&nombredescomptes);
-
-            for(i=0; i<nombredescomptes; i++)
+            int total = count + nombredescomptes;
+            for(int i=count; i<total; i++)
             {
 
                 printf("entrer le prenom du client[ %d] :\t",i+1);
@@ -97,8 +98,9 @@ int main()
                 printf("entrer le montant du client :");
 
                 scanf("%f",&compt[i].montant);
+                count++;
             }
-            for(i=0; i<nombredescomptes; i++)
+            for(int i=0; i<count; i++)
             {
                 printf(" prenom : %s\n",compt[i].prenom);
 
@@ -112,6 +114,7 @@ int main()
             break;
 
         case 3:
+
             printf("veuillez choisir l'operation souhaitee :\n1-RETRAIT\n2-depot\n");
 
             scanf("%d",&operation);
@@ -120,16 +123,17 @@ int main()
             {
             case (1):
 
-start:
+              start:
                 printf("entrer ID :\t" );
 
-                scanf("%s",&ID);
+                scanf("%s",ID);
+                    int v=0;
 
                 for(i=0; i<count; i++)
                 {
                     if( strcmp(ID,compt[i].CIN )==0)
                     {
-                        a=1;
+                        v=1;
                         printf("veuillez entrer le montant retire :\n");
 
                         scanf("%f",&retrait);
@@ -144,21 +148,21 @@ start:
                         else printf("votre solde est insuffisant\n");
                     }
                 }
-                if(a!=1)
+                if(v!=1)
                 {
                     printf("votre CIN est invalide \n");
+                 goto start;
                 }
-                goto start;
 
                 break;
 
             case (2):
 
                 do
-                {
+                {   int v=0;
                     printf("entrer ID :\n ");
 
-                    scanf("%s",&ID);
+                    scanf("%s",ID);
 
                     for(i=0; i<nombredescomptes; i++)
                     {
@@ -208,7 +212,7 @@ start:
 
             switch(affichage)
             {
-            case 1:
+            case (1):
 
                 for(i=0; i<nombredescomptes; i++)
                 {
@@ -235,7 +239,7 @@ start:
                 }
                 break;
 
-            case 2:
+            case (2):
 
                 for(i=0; i<nombredescomptes; i++)
                 {
@@ -262,7 +266,7 @@ start:
                 }
                 break;
 
-            case 3:
+            case (3):
 
                 for(i=0; i<nombredescomptes; i++)
                 {
@@ -307,8 +311,8 @@ start:
                         printf("montant :%f\n",compt[i].montant);
 
                     }
-                }
-            case 4:
+                }break;
+            case (4):
 
                 for(i=0; i<nombredescomptes; i++)
                 {
@@ -352,34 +356,51 @@ start:
 
                         printf("montant :%f\n",compt[i].montant);
                     }
-                }
+                }break;
             case 5:
 
 
-                printf("entrer ID :\t" );
+                 printf("entrer ID :\n ");
 
-                scanf("%s",&ID);
+                    scanf("%s",ID);
 
-                for(i=0; i<count; i++)
-                {
-                    if( strcmp(ID,compt[i].CIN )==0)
+                    int found=0;
+
+
+                    for(i=0; i<count; i++)
                     {
-                        printf(" prenom : %s\n",compt[i].prenom);
+                        if( stricmp(ID,compt[i].CIN )==0)
+                        {
 
-                        printf(" nom :%s\n",compt[i].nom);
-
-                        printf(" CIN :%s\n",compt[i].CIN);
-
-                        printf("montant :%f\n",compt[i].montant);
+                            found=1;
+                            n=i;
+                        }
                     }
 
 
-                    else  printf("votre CIN est invalide \n");
+                if (found==1)
+                {
+                    printf(" prenom : %s\n",compt[n].prenom);
+
+                    printf(" nom :%s\n",compt[n].nom);
+
+                    printf(" CIN :%s\n",compt[n].CIN);
+
+                    printf("montant :%f\n",compt[n].montant);
+
+                }
+
+                else printf("votre CIN est invalide \n");
+
+                break;
 
                 }break;
 
-            }
-            case 5: for(i=0; i<nombredescomptes; i++)
+            break;
+
+            case 5:
+
+                for(i=0; i<nombredescomptes; i++)
                 {
                     for(j=i+1; j<nombredescomptes; j++)
 
@@ -394,7 +415,7 @@ start:
 
                 for(i=0; i<3; i++)
                 {
-                    compt[i].montant= compt[i].montant+(compt[i].montant*1.3)/100;
+                    compt[i].montant+=(compt[i].montant*1.3)/100;
 
                     printf(" prenom : %s\n",compt[i].prenom);
 
