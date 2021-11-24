@@ -79,7 +79,9 @@ int main()
             printf("entrer le nombre des comptes que vous voulez creer:\n");
 
             scanf("%d",&nombredescomptes);
+
             int total = count + nombredescomptes;
+
             for(int i=count; i<total; i++)
             {
 
@@ -131,7 +133,7 @@ int main()
 
                 for(i=0; i<count; i++)
                 {
-                    if( strcmp(ID,compt[i].CIN )==0)
+                    if( stricmp(ID,compt[i].CIN )==0)
                     {
                         v=1;
                         printf("veuillez entrer le montant retire :\n");
@@ -151,42 +153,37 @@ int main()
                 if(v!=1)
                 {
                     printf("votre CIN est invalide \n");
-                 goto start;
+                   goto start;
                 }
 
                 break;
 
             case (2):
+                printf("entrer ID :\t" );
 
-                do
-                {   int v=0;
-                    printf("entrer ID :\n ");
+                scanf("%s",ID);
 
-                    scanf("%s",ID);
 
-                    for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
+                {
+                    if( stricmp(ID,compt[i].CIN )==0)
                     {
-                        if( strcmp(ID,compt[i].CIN )==0)
-                        {
-                            v=1;
-                        }
+                        v=1;
+                        printf("veuillez entrer le montant depose :\n");
+
+                        scanf("%f",&depot);
+
+                        compt[i].montant+=depot;
+
+                        printf("votre nouveau montant est :%f \n",compt[i].montant);
                     }
                 }
-                while(v=0 );
-                if (v=1)
+                if(v!=1)
                 {
-                    printf("veuillez entrer le montant depose : \n");
+                    printf("votre CIN est invalide \n");
 
-                    scanf("%f",&depot);
-
-                    compt[i].montant=compt[i].montant+depot;
-
-                    printf("votre montant   est :%f \n ",compt[i].montant);
-
+                   goto start;
                 }
-
-                else printf("votre CIN est invalide \n");
-
                 break;
 
             default:
@@ -214,9 +211,9 @@ int main()
             {
             case (1):
 
-                for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
                 {
-                    for(j=i+1; j<nombredescomptes; j++)
+                    for(j=i+1; j<count; j++)
 
                         if (compt[i].montant > compt[j].montant )
                         {
@@ -227,7 +224,7 @@ int main()
                             compt[j] = tem[e] ;
                         }
                 }
-                for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
                 {
                     printf(" prenom : %s\n",compt[i].prenom);
 
@@ -241,9 +238,9 @@ int main()
 
             case (2):
 
-                for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
                 {
-                    for(j=i+1; j<nombredescomptes; j++)
+                    for(j=i+1; j<count; j++)
 
                         if (compt[i].montant < compt[j].montant )
                         {
@@ -254,7 +251,7 @@ int main()
                             compt[j] = tem[e] ;
                         }
                 }
-                for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
                 {
                     printf(" prenom : %s\n",compt[i].prenom);
 
@@ -268,9 +265,9 @@ int main()
 
             case (3):
 
-                for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
                 {
-                    for(j=i+1; j<nombredescomptes; j++)
+                    for(j=i+1; j<count; j++)
 
                         if (compt[i].montant > compt[j].montant )
                         {
@@ -281,7 +278,7 @@ int main()
                             compt[j] = tem[e] ;
                         }
                 }
-                for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
                 {
                     printf(" prenom : %s\n",compt[i].prenom);
 
@@ -295,7 +292,7 @@ int main()
 
                 scanf("%f",&chiffre);
 
-                for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
                 {
                     if(compt[i].montant >= chiffre)
                     {
@@ -314,9 +311,9 @@ int main()
                 }break;
             case (4):
 
-                for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
                 {
-                    for(j=i+1; j<nombredescomptes; j++)
+                    for(j=i+1; j<count; j++)
 
                         if (compt[i].montant < compt[j].montant )
                         {
@@ -327,7 +324,7 @@ int main()
                             compt[j] = tem[e] ;
                         }
                 }
-                for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
                 {
                     printf(" prenom : %s\n",compt[i].prenom);
 
@@ -341,7 +338,7 @@ int main()
 
                 scanf("%f",&chiffre);
 
-                for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
                 {
                     if(compt[i].montant >= chiffre)
                     {
@@ -400,9 +397,9 @@ int main()
 
             case 5:
 
-                for(i=0; i<nombredescomptes; i++)
+                for(i=0; i<count; i++)
                 {
-                    for(j=i+1; j<nombredescomptes; j++)
+                    for(j=i+1; j<count; j++)
 
                         if (compt[i].montant < compt[j].montant )
                         {
@@ -411,7 +408,7 @@ int main()
                             compt[i] = compt[j];
 
                             compt[j] = tem[e] ;
-                        }
+                        }}
 
                 for(i=0; i<3; i++)
                 {
@@ -424,12 +421,11 @@ int main()
                     printf(" CIN :%s\n",compt[i].CIN);
 
                     printf("montant :%f\n",compt[i].montant);
-                }} break;
+                } break;
 
             case 6:
 
-                   printf("quitter l'application :\n");
-
+                   printf("vous avez quitter l'application \n");
 
     }}
     return 0;
